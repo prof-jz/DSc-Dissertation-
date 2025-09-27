@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: twin-app
+  namespace: twin-${ENV}
+labels:
+  app: twin-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels: { app: twin-app }
+  template:
+    metadata:
+      labels: { app: twin-app }
+    spec:
+      containers:
+        - name: twin-app
+          image: ${REGION}-docker.pkg.dev/${PROJECT}/${REPO}/twin-app:${TAG}
+          ports:
+            - containerPort: 8080
+          env:
+            - name: OT_PLC_HOST
+              value: "ot-sim-0.twin.local"  # example; replace with real IP/DNS
+            - name: OT_PLC_PORT
+              value: "502"

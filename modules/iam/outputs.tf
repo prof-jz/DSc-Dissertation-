@@ -1,0 +1,1 @@
+output "cicd_sa" { value = google_service_account.cicd.email }

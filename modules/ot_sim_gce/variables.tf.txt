@@ -1,0 +1,7 @@
+variable "project_id"        { type = string }
+variable "region"            { type = string }
+variable "network_self_link" { type = string }
+variable "subnetwork_self"   { type = string }
+variable "instance_count"    { type = number }
+variable "machine_type"      { type = string }
+variable "startup_container" { type = string }

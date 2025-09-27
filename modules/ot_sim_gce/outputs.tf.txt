@@ -1,0 +1,1 @@
+output "instance_names" { value = [for i in google_compute_instance.ot : i.name] }

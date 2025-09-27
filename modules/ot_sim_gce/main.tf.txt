@@ -1,0 +1,27 @@
+resource "google_compute_instance" "ot" {
+  count        = var.instance_count
+  name         = "ot-sim-${count.index}"
+  machine_type = var.machine_type
+  zone         = "${var.region}-a"
+
+  boot_disk { initialize_params { image = "projects/debian-cloud/global/images/family/debian-12" } }
+
+  network_interface {
+    subnetwork = var.subnetwork_self
+  }
+
+  tags = ["ot-sim"]
+
+  metadata_startup_script = <<-EOT
+    #!/usr/bin/env bash
+    set -euxo pipefail
+    apt-get update
+    apt-get install -y docker.io
+    systemctl enable --now docker
+    docker pull ${var.startup_container}
+    # Example for OpenPLC / Modbus TCP on 502
+    docker run -d --name plc-sim --restart unless-stopped -p 502:502 ${var.startup_container}
+  EOT
+}
+
+

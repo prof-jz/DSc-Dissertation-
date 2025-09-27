@@ -1,0 +1,11 @@
+variable "project_id"      { type = string }
+variable "region"          { type = string }
+variable "locations"       { type = list(string) }
+variable "cluster_name"    { type = string }
+variable "network_self"    { type = string }
+variable "subnetwork_self" { type = string }
+variable "min_nodes"       { type = number }
+variable "max_nodes"       { type = number }
+variable "machine_type"    { type = string }
+variable "master_cidr"     { type = string }
+variable "bastion_cidr"    { type = string }
