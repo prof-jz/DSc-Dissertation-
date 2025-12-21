@@ -1,0 +1,4 @@
+name: hai-torch-gpu
+dependencies:
+  - python=3.12
+  - pip
